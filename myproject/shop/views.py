@@ -1,9 +1,19 @@
 from django.shortcuts import render
+from .models import product
+from math import ceil
+
+# Create your views here.
 from django.http import HttpResponse
 
 
 def index(request):
-    return render(request, 'shop/index.html')
+    products = product.objects.all()
+    print(products)
+    n = len(products)
+    nSlides = n//4 + ceil((n/4)-(n//4))
+    params = {'no_of_slides': nSlides, 'range': range(
+        1, nSlides), 'product': products}
+    return render(request, 'shop/index.html', params)
 
 
 def about(request):
@@ -11,20 +21,20 @@ def about(request):
 
 
 def contact(request):
-    return HttpResponse("we are at contact ")
+    return HttpResponse("We are at contact")
 
 
 def tracker(request):
-    return HttpResponse("we are at contact ")
+    return HttpResponse("We are at tracker")
 
 
 def search(request):
-    return HttpResponse("we are at search ")
+    return HttpResponse("We are at search")
 
 
-def productview(request):
-    return HttpResponse("we are at productview ")
+def productView(request):
+    return HttpResponse("We are at product view")
 
 
 def checkout(request):
-    return HttpResponse("we are at checkout ")
+    return HttpResponse("We are at checkout")
